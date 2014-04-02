@@ -1,0 +1,55 @@
+﻿@model IndividualAssignment2A.ViewModels.SingleProduct
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    @Html.Raw(ViewBag.ErrorMessage)
+    @using (Html.BeginForm("Add", "Home", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        @Html.ValidationSummary(true)
+        string price;
+        price = Model.Price.ToString("C");
+    
+        <fieldset>
+            <legend>Add Product</legend>
+    
+            <div class="form-group col-xs-8 col-md-2" >
+               
+                <label class="sr-only" for="quantity">Quantity</label>                     
+                @Html.EditorFor(model => model.Quantity, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Quantity)
+</div>
+    
+            <div class="form-group col-xs-8 col-md-2">
+<label class="sr-only" for="exampleInputEmail2">Product Name</label>
+
+                @Html.TextBoxFor(model => model.ProdName, new { @readonly = true,  @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProdName)
+            </div>
+    
+            <div class="form-group col-xs-8 col-md-2">
+<label class="sr-only" for="exampleInputEmail2">Price</label>
+
+                @Html.TextBoxFor(model => price, new { @class = "form-control", @readonly = true } )
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+    
+            <div class="form-group col-xs-8 col-md-2">
+<label class="sr-only" for="exampleInputEmail2">Product ID</label>
+
+                @Html.TextBoxFor(model => model.ProductID,  new { @class = "form-control" , @readonly = true })
+                @Html.ValidationMessageFor(model => model.ProductID)
+            </div>
+    
+                <div class="btn-group inline form-group col-xs-8 col-md-2">
+                     <button type="submit" value="Save" class="btn btn-default">Submit</button>
+                     @Html.ActionLink("Cancel", "Index", new { productID = Model.ProductID },new { @class = "btn btn-default" })
+
+                    </div>
+                
+           
+        </fieldset>
+    }
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

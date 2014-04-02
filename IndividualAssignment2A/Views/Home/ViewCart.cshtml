@@ -1,0 +1,64 @@
+﻿@model IndividualAssignment2A.ViewModels.Cart
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Raw(TempData["error"])
+@using(Html.BeginForm("Update", "Home", FormMethod.Post, new {@class = "form-inline" })) {
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Cart</legend>
+        @{
+        decimal grandtotal = 0;
+        string grandTotal = "";
+        decimal finaltotal = 0;
+        string finalTotal = "";
+        decimal TaxRate = 0.07m;
+        string taxamount = "";
+        decimal taxAmount = 0;
+        
+        var i=0;
+      
+        foreach (var item in Model.Products) {
+            
+            string price = item.Price.ToString("C");
+            string total = (item.Price * item.Quantity).ToString("C");
+            grandtotal = grandtotal + (item.Price * item.Quantity);
+            grandTotal = grandtotal.ToString("C");
+            taxAmount = grandtotal * TaxRate;
+            taxamount = taxAmount.ToString("C");
+            finalTotal = (grandtotal + taxAmount).ToString("C");
+            
+            
+            //@Html.ActionLink("Remove", "Remove", new {prodID = item.ProductID})
+            <div class="form-group col-xs-8 col-md-2"><input type="text" name="products[@Html.Raw(i)].ProdName" value="@Html.Raw(item.ProdName)" class="form-control" readonly /></div>
+            <div class="form-group col-xs-8 col-md-2"><input type="text" name="products[@Html.Raw(i)].ProductID" value="@Html.Raw(item.ProductID)" class="form-control" readonly/></div>
+            <div class="form-group col-xs-8 col-md-2"><input type="text" name="products[@Html.Raw(i)].Quantity" value="@Html.Raw(item.Quantity)" class="form-control" /></div>
+            <div class="form-group col-xs-8 col-md-2"><input type="text" name="products[@Html.Raw(i)].Price" value="@Html.Raw(price)" class="form-control" readonly/></div>
+            <div class="form-group col-xs-8 col-md-2"><input type="text" name="total" value="@Html.Raw(total)" class="form-control" readonly/></div> 
+            <div class="form-group col-xs-8 col-md-1"><button type="button" class="btn btn-large navbar-btn">@Html.ActionLink("Remove", "Remove", new {prodID = item.ProductID})</button></div>    
+            
+            i++;
+            
+        }
+            <div class="form-group col-md-8"></div>
+            <div class="form-group col-xs-8 col-md-2"><p>Subtotal</p><input type="text" name="grandTotal" value="@Html.Raw(grandTotal)" class="form-control"readonly /></div>
+            <div class="form-group col-md-8"></div>
+            <div class="form-group col-xs-8 col-md-2"><p>Tax</p><input type="text" name="grandTotal" value="@Html.Raw(taxamount)" class="form-control"readonly /></div> <p></p>
+            <div class="form-group col-md-8"></div>
+            <div class="form-group col-xs-8 col-md-2"><p>Total</p><input type="text" name="grandTotal" value="@Html.Raw(finalTotal)" class="form-control"readonly /></div>
+            <br />
+            <br />
+        }
+            
+
+
+                    <div class="btn-group inline col-xs-10 col-md-6" style="display:block;">
+                <button type="submit" value="Save" class="btn btn-default">Save Order</button>
+                @Html.ActionLink("Go to checkout", "ThankYou",null, new {@class = "btn btn-default"})
+                @Html.ActionLink("Cancel Order", "Cancel", null, new {@class = "btn btn-default"})
+            </div>
+            
+        </fieldset>
+    }
+

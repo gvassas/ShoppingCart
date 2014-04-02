@@ -1,0 +1,52 @@
+﻿@model IndividualAssignment2A.ViewModels.Email
+
+@{
+    ViewBag.Title = "Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Email</h2>
+
+@using (Html.BeginForm(new {@class = "form-inline" })) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Email</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sender)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sender, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Sender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Subject)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Subject, new { @class = "form-control", @id = "disabledInput" })
+            @Html.ValidationMessageFor(model => model.Subject)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Body)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Body, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Body)
+        </div>
+
+        <p>
+            <input type="submit" value="Send" class="btn btn-default"/>
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

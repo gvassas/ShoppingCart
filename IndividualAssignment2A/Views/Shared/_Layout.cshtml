@@ -1,0 +1,44 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#"><img src="~/Content/Images/mini-Arnold-Schwarzenegger-9476355-2-402.jpg" class="img-rounded" /></a>
+     <p class="navbar-text h1 text-center">Arnie's one-stop sports shop!</p> 
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="navbar-collapse bs-example-navbar-collapse-1">
+    <div class="btn-toolbar">
+        <ul class="nav navbar-nav navbar-right">        
+      <li><button type="button" class="btn btn-primary btn-large navbar-btn">@Html.ActionLink("Shop", "Index", null, new { @style = "color:white;" })</button></li>
+        <li><button type="button" class="btn btn-primary btn-large navbar-btn"><span class="glyphicon glyphicon-shopping-cart"></span>@Html.ActionLink("View Cart","ViewCart",null, new { @style = "color:white !important;" })</button></li>
+        <li><button type="button" class="btn btn-primary btn-large navbar-btn"><span class="glyphicon glyphicon-envelope"></span>@Html.ActionLink("Contact Us","Email",null, new { @style = "color:white !important;" })</button></li>
+    </ul>
+
+    </div>
+  </div><!-- /.navbar-collapse -->
+</nav>
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

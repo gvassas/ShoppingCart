@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IndividualAssignment2A.Product>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="table-responsive">
+    <table class="table table-hover table-hover">
+        <tr><th></th>
+            <th>
+                Item
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                ProductID
+            </th>
+            
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>            <td>
+                @Html.ActionLink("Add to Cart", "Add", new { productID = item.productID })
+            </td>
+            <td>
+                @if (item.productID == 107){ <img src="~/Content/Images/mini-images.jpg" />
+                }
+                else if (item.productID == 218) {<img src="~/Content/Images/mini-Warrior-Dynasty-AX1-Hockey-Stick-4_jpeg_752x718.jpg" />}
+                else {<img src="~/Content/Images/mini-pMLB2-5432398dt.jpg" />}
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.productID)
+            </th>
+
+        </tr>
+    }
+    
+    </table>
+    </div>
+
